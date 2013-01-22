@@ -1,5 +1,10 @@
 package com.phantaware.engine.event;
 
-public class Event {
+import java.util.ArrayList;
 
+public class Event 
+{
+	private ArrayList<Cause> causes;
+	private ArrayList<Effect> effects;
+	private int priority;
 }
