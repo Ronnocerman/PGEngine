@@ -8,22 +8,31 @@ import com.phantaware.engine.entity.Entity;
 public class GameMap 
 {
 	private TreeMap<Position,ArrayList<Entity>> map = new TreeMap<Position,ArrayList<Entity>>();
+	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	public void addEntity(Entity e)
 	{
 		ArrayList<Entity> spot;
-		if((spot=map.get(e.getPos()))!=null)
-			spot.add(e);
-		else
+		if(!entities.contains(e))
 		{
-			spot = new ArrayList<Entity>();
-			spot.add(e);
-			map.put(e.getPos(),spot);
+			if((spot=map.get(e.getPos()))!=null)
+				spot.add(e);
+			else
+			{
+				spot = new ArrayList<Entity>();
+				spot.add(e);
+				map.put(e.getPos(),spot);
+			}
+			entities.add(e);
 		}
 	}
 	public ArrayList<Entity> getEntities(Position p)
 	{
 		return new ArrayList<Entity>(map.get(p));
+	}
+	public ArrayList<Entity> getEntities()
+	{
+		return new ArrayList<Entity>(entities);
 	}
 	public boolean contains(Entity e)
 	{
